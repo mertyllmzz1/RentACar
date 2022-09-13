@@ -1,0 +1,97 @@
+﻿<!doctype html>
+<html>
+<head>
+    <style>
+        .cardWidth {
+            max-height: 30%;
+            max-width: 30%;
+        }
+
+        .cardSize {
+            height: 60%;
+            width: 100%;
+        }
+        .textPos {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form action="/admin/araba/ImageUpdate/@Model.ID" method="post" enctype="multipart/form-data">
+        <div class="container">
+            <div class="card cardWidth" style="max-width:1140px">
+                <div class="card text-center align-items-center">
+                    <img class="card-img-top cardWidth text-center" src="/images/@Model.Image" alt="Card image cap">
+                    <h3 class="card-title textPos"><strong>Main Image</strong></h3>
+                    <br />
+                    <div class="custom-file">
+                        <input type="file" name="MainImages" value="@Model.Image" onchange="ImageChange(this)" class="custom-file-input">
+                        <label class="custom-file-label" id="MainImages">@Model.Image</label>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="card-deck">
+
+                <div class="card">
+                    <img class="card-img-top fill cardSize" src="/images/@Model.SubImage1" alt="Card image cap">
+                    <br />
+                    <h3 class="card-title textPos"><strong>Sub Image 1</strong></h3>
+                    <br />
+                    <a href="admin/araba/DeleteImage/@Model.SubImage1" class="btn btn-danger fa-pull-right">Sil</a>
+                    <br />
+                    <div class="custom-file">
+                        <input type="file" name="SubImage1" class="custom-file-input" onchange="ImageChange(this)">
+                        <label class="custom-file-label" id="SubImage1">@Model.SubImage1</label>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top fill cardSize" src="/images/@Model.SubImage2" alt="Card image cap">
+                    <br />
+                    <h3 class="card-title textPos"><strong>Sub Image 2</strong></h3>
+                    <br />
+                    <a href="admin/araba/DeleteImage/@Model.SubImage2" class="btn btn-danger fa-pull-right">Sil</a>
+                    <br />
+                    <div class="custom-file">
+                        <input type="file" name="SubImage2" onchange="ImageChange(this)" class="custom-file-input">
+                        <label class="custom-file-label " id="SubImage2">@Model.SubImage2</label>
+                    </div>
+                </div>
+                <div class="card">
+                    <img class="card-img-top fill cardSize" src="/images/@Model.SubImage3" alt="Card image cap">
+                    <br />
+                    <h3 class="card-title textPos"><strong>Sub Image 3</strong></h3>
+                    <br />
+                    <a href="admin/araba/DeleteImage/@Model.SubImage3" class="btn btn-danger fa-pull-right">Sil</a>
+                    <br />
+                    <div class="custom-file">
+                        <input type="file" name="SubImage3" onchange="ImageChange(this)" class="custom-file-input">
+                        <label class="custom-file-label" id="SubImage3">@Model.SubImage3</label>
+                    </div>
+                </div>
+                <button type="submit" style="width:100%;margin-top:2%;" class="btn btn-success fa-pull-right">Değiştir</button>
+
+            </div>
+
+        </div>
+    </form>
+    <script>
+        function ImageChange(item) {
+            var imageName = item.value;
+            $("#" + item.name).text(imageName.split(/['\\']/).pop());
+        }
+        function SubImageChange(item) {
+            var imageName = item.value;
+            $("#lblSubImage").text("");
+
+            $.each(item.files, function (index, value) {
+                currentText = $("#lblSubImage").text();
+                $("#lblSubImage").text(currentText + ',' + value.name);
+            })
+        }
+        function AvaliableCheck(items) {
+            $("#chcAvaliable").val(items.value.toLowerCase() == 'true' ? false : true);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+﻿
+
+    <div class="">
+        <a href="Araba/Insert" type="button" class="btn btn-primary">Add</a>
+        <table class="table table-bordered table-striped " >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Plate</th>
+                    <th>Name</th>
+                    <th>First Rent Price</th>
+                    <th>Second Rent Price</th>
+                    <th>Third Rent Price</th>
+                    <th>Avaliable</th>
+                    <th>Capacity</th>
+                    <th>Gear Type</th>
+                    <th>Max Distance</th>
+                    <th>Explanation</th>
+                    <th>Images</th>
+                    <th>Progresses</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.ID</td>
+                        <td>@item.Plate</td>
+                        <td>@item.Name</td>
+                        <td>@item.RentPriceFirst</td>
+                        <td>@item.RentPriceSecond</td>
+                        <td>@item.RentPriceThird</td>
+                        <td>@item.Avaliable</td>
+                        <td>@item.Capacity</td>
+                        <td>@item.GearType</td>
+                        <td>@item.MaxDistance</td>
+                        <td>@item.Explanation</td>
+                        <td><a href="/admin/araba/CarImages/@item.ID" class="btn btn-primary">Show Images</a></td>
+                        <td><a href="/admin/araba/Update/@item.ID" class="btn btn-info">Update</a>
+                            <a href="/admin/araba/Delete/@item.ID" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>

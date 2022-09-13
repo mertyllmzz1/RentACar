@@ -1,0 +1,45 @@
+﻿@using Core.Results.ComplexTypes;
+@using Business.CustomFunctions;
+<!doctype html>
+<html>
+<head>
+    <style>
+
+
+        .input-group {
+            margin-top: 1%;
+            margin-left: 3%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/admin/Musteri/Update/@Model.ID" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Plate</label>
+                    <input type="text" class="form-control" disabled="disabled" value="@Model.NameSurname" name="NameSurname">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" name="Eposta" disabled="disabled" value="@Model.Email" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" name="IsAdmin" id="chcAvaliable" value="@Model.IsAdmin.ToString()" onclick="IsAdminCheck(this)" type="checkbox" @if (Model.IsAdmin) { @Html.Raw("checked") }>
+                    <label class="form-check-label">
+                        Is Admin
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Car</button>
+        </form>
+    </div>
+    <script>
+        function IsAdminCheck(items) {
+            $("#chcAvaliable").val(items.value.toLowerCase() == 'true' ? false : true);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+﻿@using Core.Results.ComplexTypes;
+@using Business.CustomFunctions;
+<head>
+    <style>
+
+
+        .input-group {
+            margin-top: 1%;
+            margin-left: 3%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/admin/Araba/Insert" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Plate</label>
+                    <input type="text" class="form-control" name="Plate">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" name="Name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label f>Rent Price 1 </label>
+                <input type="text" class="form-control" name="RentPriceFirst">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Rent Price 1</label>
+                <input type="text" class="form-control" name="RentPriceSecond">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Rent Price 3</label>
+                <input type="text" class="form-control" name="RentPriceThird">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Max Distance (as KM)</label>
+                    <input type="text" class="form-control" name="MaxDistance">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gear</label>
+                    <select name="GearType" class="form-control">
+                        <option selected>Choose...</option>
+                        @foreach (var item in Enum.GetValues(typeof(GearTypes)))
+                        {
+                            <option value="@((byte)item)">@EnumExtensions.GetEnumDescription((Enum)item)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Category</label>
+                    <select name="CategoriesID"  class="form-control">
+                        @foreach (var item in ViewBag.Kategoriler)
+                        {
+                            <option value="@item.ID">@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputState">Explanation</label>
+                    <textarea class="form-control" name="Explanation" rows="3"></textarea>
+                </div>
+            </div>
+
+            <div class="custom-file">
+                <input type="file" name="MainImages" class="custom-file-input" required>
+                <label class="custom-file-label">Main Image...</label>
+            </div>
+            <div class="custom-file">
+                <input type="file" name="resimler" class="custom-file-input" multiple>
+                <label class="custom-file-label">Sub Images...</label>
+            </div>
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" name="Avaliable" type="checkbox" checked value="true">
+                    <label class="form-check-label">
+                        Avaliable
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Car</button>
+        </form>
+    </div>
+
+</body>

@@ -1,0 +1,77 @@
+﻿
+<div class="hero inner-page" style="background-image: url('images/hero_1_a.jpg');">
+
+    <div class="container">
+        <div class="row align-items-end ">
+            <div class="col-lg-5">
+
+                <div class="intro">
+                    <h1><strong>Listings</strong></h1>
+                    <div class="custom-breadcrumbs"><a href="/Home">Home</a> <span class="mx-2">/</span> <strong>Filomuz</strong></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="site-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <h2 class="section-heading"><strong>Araç Listesi</strong></h2>
+                <p class="mb-5">Geniş araç filomuzu aşağıdaki listeden inceleyip, ihtiyacınız olan aracı uygun fiyata seçebilirsiniz.</p>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-6 col-lg-4 mb-4">
+
+                    <div class="listing d-block  align-items-stretch">
+                        <div class="listing-img h-100 mr-4">
+                            <img src="images/@item.Image" alt="Image" class="img-fluid">
+                        </div>
+                        <div class="listing-contents h-100">
+                            <h3>@item.Name</h3>
+                            <div class="rent-price">
+                                <strong>@item.RentPriceFirst</strong><span class="mx-1">/</span>day
+                            </div>
+                            <div class="d-block d-md-flex mb-3 border-bottom pb-3">
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Maks.Mesafe</span>
+                                    <span class="number">@item.MaxDistance</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Vites </span>
+                                    <span class="number">@item.GearType</span>
+                                </div>
+                                <div class="listing-feature pr-4">
+                                    <span class="caption">Kapasite</span>
+                                    <span class="number">@item.Capacity</span>
+                                </div>
+                            </div>
+                            <div>
+                                <p>@item.Explanation</p>
+                                <p><a href="#" class="btn btn-primary btn-sm">Rent Now</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            }
+
+        </div>
+        <div class="row">
+            <div class="col-5">
+                <div class="custom-pagination">
+                    
+                    <span>1</span>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

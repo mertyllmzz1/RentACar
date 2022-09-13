@@ -1,0 +1,33 @@
+﻿<style>
+    .collen{
+        width:10%;
+    }
+</style>
+
+<div class="">
+    <a href="Kategoriler/Insert" type="button" class="btn btn-primary">Add</a>
+    <table class="table table-bordered table-striped ">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td class="collen">@item.ID</td>
+                    <td class="collen">@item.Name</td>
+                    <td class="collen">@item.Status</td>
+                    <td class="collen">
+                        <a href="/admin/araba/Update/@item.ID" class="btn btn-info">Update</a>
+                        <a href="/admin/araba/Delete/@item.ID" class="btn btn-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

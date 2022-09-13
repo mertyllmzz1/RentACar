@@ -1,0 +1,110 @@
+﻿@using Core.Results.ComplexTypes;
+@using Business.CustomFunctions;
+<!doctype html>
+<html>
+<head>
+    <style>
+
+
+        .input-group {
+            margin-top: 1%;
+            margin-left: 3%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="/admin/Araba/Update/@Model.ID" method="post" enctype="multipart/form-data">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>Plate</label>
+                    <input type="text" class="form-control" value="@Model.Plate" name="Plate">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>Name</label>
+                    <input type="text" name="Name" value="@Model.Name" class="form-control">
+                </div>
+            </div>
+            <div class="form-group">
+                <label f>Rent Price 1 </label>
+                <input type="text" class="form-control" value="@Model.RentPriceFirst" name="RentPriceFirst">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Rent Price 1</label>
+                <input type="text" class="form-control" value="@Model.RentPriceSecond" name="RentPriceSecond">
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Rent Price 3</label>
+                <input type="text" class="form-control" value="@Model.RentPriceThird" name="RentPriceThird">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label>Max Distance (as KM)</label>
+                    <input type="text" class="form-control" value="@Model.MaxDistance" name="MaxDistance">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Gear</label>
+                    <select name="GearType" class="form-control">
+                        <option selected>Choose...</option>
+                        @foreach (var item in Enum.GetValues(typeof(GearTypes)))
+                        {
+                            <option value="@((byte)item)" @if ((byte)item == Model.GearType) { @Html.Raw("selected='selected'") }>@EnumExtensions.GetEnumDescription((Enum)item)</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Category</label>
+                    <select name="CategoriesID" value="@Model.CategoriesID" class="form-control">
+                        @foreach (var item in ViewBag.Kategoriler)
+                        {
+                            <option value="@item.ID" @if (item.ID == Model.CategoriesID) { @Html.Raw("selected='selected'") }>@item.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="inputState">Explanation</label>
+                    <textarea class="form-control" name="Explanation" rows="3">@Model.Explanation</textarea>
+                </div>
+            </div>
+
+            @*<div class="custom-file">
+                    <input type="file" name="MainImages"  value="@Model.Image" class="custom-file-input" id="fileImage"onchange="ImageChange(this)" required>
+                    <label class="custom-file-label" id="lblMainImage">Main Image...</label>
+                </div>
+                <div class="custom-file">
+                    <input type="file" name="resimler" id="fileSubImage"  onchange="SubImageChange(this)"class="custom-file-input" multiple>
+                    <label class="custom-file-label" id="lblSubImage">Sub Images...</label>
+                </div>*@
+            <div class="form-group">
+                <div class="form-check">
+                    <input class="form-check-input" name="Avaliable" id="chcAvaliable" value="@Model.Avaliable.ToString()" onclick="AvaliableCheck(this)" type="checkbox" @if (Model.Avaliable) { @Html.Raw("checked") }>
+                    <label class="form-check-label">
+                        Avaliable
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Car</button>
+        </form>
+    </div>
+    <script>
+        function ImageChange(item) {
+            var imageName = item.value;
+            $("#lblMainImage").text(imageName.split(/['\\']/).pop());
+        }
+        function SubImageChange(item) {
+            var imageName = item.value;
+            $("#lblSubImage").text("");
+
+            $.each(item.files, function (index, value) {
+                currentText = $("#lblSubImage").text();
+                $("#lblSubImage").text(currentText + ',' + value.name);
+            })
+        }
+        function AvaliableCheck(items) {
+            $("#chcAvaliable").val(items.value.toLowerCase() == 'true' ? false : true);
+        }
+    </script>
+</body>
+</html>
